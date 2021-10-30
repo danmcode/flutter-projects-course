@@ -1,4 +1,6 @@
-import 'package:counter/src/pages/home_page.dart';
+import 'package:counter/src/pages/contador_page.dart';
+//import 'package:counter/src/pages/home_page.dart';
+
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -6,8 +8,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return const MaterialApp(
-      home: HomePage(),
+    return MaterialApp(
+      //home: HomePage(),
+      home: ContadorPage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
