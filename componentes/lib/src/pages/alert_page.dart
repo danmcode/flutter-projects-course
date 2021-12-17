@@ -9,6 +9,7 @@ class AlertPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Alert Page'),
       ),
+      floatingActionButton: ,
     );
   }
 }
