@@ -10,8 +10,8 @@ class CustomCardType1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Column(
-        children: const [
-          ListTile(
+        children: [
+          const ListTile(
             leading: Icon(
               Icons.photo_album_outlined,
               color: AppTheme.primary,
@@ -19,6 +19,22 @@ class CustomCardType1 extends StatelessWidget {
             title: Text('Soy un titulo'),
             subtitle: Text(
                 'Et occaecat adipisicing consectetur in. Mollit aliquip pariatur cillum officia irure id deserunt sint duis veniam est mollit. Elit incididunt aliquip culpa ea non.'),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  onPressed: () {},
+                  child: const Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text('Ok'),
+                ),
+              ],
+            ),
           )
         ],
       ),
