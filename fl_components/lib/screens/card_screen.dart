@@ -17,17 +17,23 @@ class CardScreen extends StatelessWidget {
         ),
         children: const [
           CustomCardType1(),
-<<<<<<< HEAD
-          CustomCardType1(),
-          CustomCardType1(),
-          CustomCardType1(),
-          CustomCardType1(),
-=======
           SizedBox(
             height: 10,
           ),
-          CustomCardType2(),
->>>>>>> 136a3695c88fae875632f4823ae92492905db13d
+          CustomCardType2(
+            imageUrl:
+                'https://upload.wikimedia.org/wikipedia/commons/8/86/Landscape_mountain.jpg',
+            name: 'Un hermoso paisaje',
+          ),
+          CustomCardType2(
+            imageUrl:
+                'https://iso.500px.com/wp-content/uploads/2014/06/W4A2827-1.jpg',
+            name: 'Quiero ir ahi',
+          ),
+          CustomCardType2(
+            imageUrl:
+                'https://photographylife.com/wp-content/uploads/2020/03/Dan-Ballard-Landscapes-6.jpg',
+          ),
         ],
       ),
     );

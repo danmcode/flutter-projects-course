@@ -17,5 +17,19 @@ class AppTheme {
         primary: primary,
       ),
     ),
+
+    //Floating action button
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: primary,
+      elevation: 5,
+    ),
+
+    //Elevation button
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+      primary: Colors.indigo,
+      shape: const StadiumBorder(),
+      elevation: 0,
+    )),
   );
 }
