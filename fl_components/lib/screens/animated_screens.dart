@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class AnimatedScreen extends StatefulWidget {
@@ -11,6 +13,25 @@ class _AnimatedScreenState extends State<AnimatedScreen> {
   double _width = 50;
   double _height = 50;
   Color _color = Colors.indigo;
+  BorderRadiusGeometry _borderRadius = BorderRadius.circular(10);
+
+  void changeShape() {
+    final random = Random();
+    _width = random.nextInt(300).toDouble() + 70;
+    _height = random.nextInt(300).toDouble() + 70;
+    _color = Color.fromRGBO(
+      random.nextInt(255),
+      random.nextInt(255),
+      random.nextInt(255),
+      1,
+    );
+
+    _borderRadius = BorderRadius.circular(
+      random.nextInt(100).toDouble() + 10,
+    );
+
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +40,26 @@ class _AnimatedScreenState extends State<AnimatedScreen> {
         title: const Text('Animated container'),
       ),
       body: Center(
-        child: Container(
-          width: 100,
-          height: 100,
+        child: AnimatedContainer(
+          width: _width,
+          height: _height,
           decoration: BoxDecoration(
-            color: Colors.red,
-            borderRadius: BorderRadius.circular(20),
+            color: _color,
+            borderRadius: _borderRadius,
           ),
+          duration: const Duration(
+            microseconds: 400,
+          ),
+          curve: Curves.bounceOut,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          changeShape();
+        },
+        child: const Icon(
+          Icons.play_circle_outline,
+          size: 35,
         ),
       ),
     );
