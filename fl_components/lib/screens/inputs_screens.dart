@@ -22,7 +22,12 @@ class InputsScreen extends StatelessWidget {
                   initialValue: 'Daniel Muelas',
                   textCapitalization: TextCapitalization.words,
                   onChanged: (value) => print('value: $value'),
-                )
+                  validator: (value) {
+                    if (value == null) return 'Este campo esta vacio';
+                    return value.length < 3 ? 'Minimo de 3 letras' : null;
+                  },
+                  autovalidateMode: AutovalidateMode.always,
+                ),
               ],
             ),
           ),

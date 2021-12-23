@@ -41,16 +41,16 @@ class _AnimatedScreenState extends State<AnimatedScreen> {
       ),
       body: Center(
         child: AnimatedContainer(
+          duration: const Duration(
+            microseconds: 400,
+          ),
+          curve: Curves.bounceOut,
           width: _width,
           height: _height,
           decoration: BoxDecoration(
             color: _color,
             borderRadius: _borderRadius,
           ),
-          duration: const Duration(
-            microseconds: 400,
-          ),
-          curve: Curves.bounceOut,
         ),
       ),
       floatingActionButton: FloatingActionButton(
