@@ -22,7 +22,7 @@ class AvatarScreen extends StatelessWidget {
         child: CircleAvatar(
           maxRadius: 110,
           backgroundImage: NetworkImage(
-              'https://i2.wp.com/noticieros.televisa.com/wp-content/uploads/2021/05/dia-de-goku-diez-cosas-que-no-sabias-de-dragon-ball.jpg'),
+              'https://www.latercera.com/resizer/Am6Tr2ws8JnL4CHLfU_Humpr56Q=/900x600/smart/arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/XMJRWZH5N5CBXPL67NAKBGXFNI.jpg'),
         ),
       ),
     );
