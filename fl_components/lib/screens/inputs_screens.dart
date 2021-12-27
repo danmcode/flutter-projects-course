@@ -1,3 +1,4 @@
+import 'package:fl_components/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class InputsScreen extends StatelessWidget {
@@ -6,31 +7,51 @@ class InputsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Inputs & Forms'),
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 10,
-            ),
-            child: Column(
-              children: [
-                TextFormField(
-                  autofocus: true,
-                  initialValue: 'Daniel Muelas',
-                  textCapitalization: TextCapitalization.words,
-                  onChanged: (value) => print('value: $value'),
-                  validator: (value) {
-                    if (value == null) return 'Este campo esta vacio';
-                    return value.length < 3 ? 'Minimo de 3 letras' : null;
-                  },
-                  autovalidateMode: AutovalidateMode.always,
-                ),
-              ],
-            ),
+      appBar: AppBar(
+        title: const Text('Inputs & Forms'),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 10,
           ),
-        ));
+          child: Column(
+            children: const [
+              CustomInputField(
+                labelText: 'Nombre',
+                hintText: 'Nombre del usuario',
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              CustomInputField(
+                labelText: 'Apellido',
+                hintText: 'Apellido del usuario',
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              CustomInputField(
+                labelText: 'Correo',
+                hintText: 'Correo del usuario',
+                keyboardType: TextInputType.emailAddress,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              CustomInputField(
+                labelText: 'Contraseña',
+                hintText: 'Contraseña del usuario',
+                obscureText: true,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

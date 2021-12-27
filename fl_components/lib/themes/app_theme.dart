@@ -26,10 +26,47 @@ class AppTheme {
 
     //Elevation button
     elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-      primary: Colors.indigo,
-      shape: const StadiumBorder(),
-      elevation: 0,
-    )),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.indigo,
+        shape: const StadiumBorder(),
+        elevation: 0,
+      ),
+    ),
+
+    //Input Decoration
+    inputDecorationTheme: const InputDecorationTheme(
+      floatingLabelStyle: TextStyle(
+        color: primary,
+      ),
+      // Cuando el input esta habilitado
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: primary,
+        ),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        ),
+      ),
+
+      //Cuando se hace tap en el input
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: primary,
+        ),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        ),
+      ),
+
+      //El borde en general del input
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        ),
+      ),
+    ),
   );
 }
