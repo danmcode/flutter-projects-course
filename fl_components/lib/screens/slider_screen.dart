@@ -11,7 +11,7 @@ class SliderScreen extends StatefulWidget {
 class _SliderScreenState extends State<SliderScreen> {
   //
   double _sliderValue = 50;
-  bool _sliderEnable = true;
+  bool _sliderEnabled = true;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class _SliderScreenState extends State<SliderScreen> {
             max: 1000,
             activeColor: AppTheme.primary,
             value: _sliderValue,
-            onChanged: _sliderEnable
+            onChanged: _sliderEnabled
                 ? (value) {
                     _sliderValue = value;
                     print(value);
@@ -34,13 +34,53 @@ class _SliderScreenState extends State<SliderScreen> {
                   }
                 : null,
           ),
-          Checkbox(
-            value: true,
-            onChanged: (value) {
-              _sliderEnable = value ?? true;
-              setState(() {});
-            },
+
+          //Checkbox
+          // Checkbox(
+          //   value: _sliderEnabled,
+          //   onChanged: (value) {
+          //     _sliderEnabled = value ?? true;
+          //     setState(() {});
+          //   },
+          // ),
+
+          //CheckBox List Tile
+          CheckboxListTile(
+            activeColor: AppTheme.primary,
+            title: const Text('Habilitar Slider'),
+            value: _sliderEnabled,
+            onChanged: (value) => setState(
+              () {
+                _sliderEnabled = value ?? true;
+              },
+            ),
           ),
+
+          //Switch
+          // Switch(
+          //   activeColor: AppTheme.primary,
+          //   value: _sliderEnabled,
+          //   onChanged: (value) => setState(
+          //     () {
+          //       _sliderEnabled = value;
+          //     },
+          //   ),
+          // ),
+
+          //Switch List Tile
+          SwitchListTile.adaptive(
+            activeColor: AppTheme.primary,
+            title: const Text('Habilitar Slider'),
+            value: _sliderEnabled,
+            onChanged: (value) => setState(
+              () {
+                _sliderEnabled = value;
+              },
+            ),
+          ),
+
+          const AboutListTile(),
+
           Expanded(
             child: SingleChildScrollView(
               child: Image(
