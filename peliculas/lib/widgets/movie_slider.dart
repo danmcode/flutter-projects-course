@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:peliculas/models/models.dart';
 
-class MovieSliderScreen extends StatelessWidget {
+class MovieSlider extends StatelessWidget {
   //Parametros
   final List<Movie> movies;
   final String? title;
+  final Function onNextPage;
 
-  const MovieSliderScreen({
+  const MovieSlider({
     Key? key,
     required this.movies,
+    required this.onNextPage,
     this.title = "",
   }) : super(key: key);
 
@@ -38,7 +40,7 @@ class MovieSliderScreen extends StatelessWidget {
           ),
 
           //Elementos en horizontal
-          _MoviePoster(movies),
+          _MoviePoster(movies, onNextPage),
         ],
       ),
     );
@@ -47,28 +49,33 @@ class MovieSliderScreen extends StatelessWidget {
 
 class _MoviePoster extends StatefulWidget {
   final List<Movie> movies;
+  final Function onNextPage;
 
-  const _MoviePoster(this.movies);
+  const _MoviePoster(this.movies, this.onNextPage);
 
   @override
   State<_MoviePoster> createState() => _MoviePosterState();
 }
 
 class _MoviePosterState extends State<_MoviePoster> {
-  final ScrollController scrollController = new ScrollController();
+  final ScrollController scrollController = ScrollController();
 
   //Codigo que se ejecuta cuando se contruya el widget
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    print(scrollController.position.pixels);
+
+    scrollController.addListener(() {
+      if (scrollController.position.pixels >=
+          scrollController.position.maxScrollExtent - 500) {
+        widget.onNextPage();
+      }
+    });
   }
 
   //Codigo que se ejecuta cuando se destruya el widget
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -91,7 +98,7 @@ class _MoviePosterState extends State<_MoviePoster> {
                   onTap: () => Navigator.pushNamed(
                     context,
                     'details',
-                    arguments: 'movie-details',
+                    arguments: movie,
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
