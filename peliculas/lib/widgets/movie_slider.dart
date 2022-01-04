@@ -16,7 +16,7 @@ class MovieSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: 300,
       child: Column(
@@ -88,6 +88,9 @@ class _MoviePosterState extends State<_MoviePoster> {
         scrollDirection: Axis.horizontal,
         itemBuilder: (_, int index) {
           final movie = widget.movies[index];
+          String heroId =
+              'widget.movies[index], ${movie.title}-$index-${movie.id}';
+          movie.heroId = heroId;
           return Container(
             width: 130,
             height: 190,
@@ -100,18 +103,21 @@ class _MoviePosterState extends State<_MoviePoster> {
                     'details',
                     arguments: movie,
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: FadeInImage(
-                      placeholder: const AssetImage(
-                        'assets/no-image.jpg',
+                  child: Hero(
+                    tag: heroId,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: FadeInImage(
+                        placeholder: const AssetImage(
+                          'assets/no-image.jpg',
+                        ),
+                        image: NetworkImage(
+                          movie.fullPosterImge,
+                        ),
+                        fit: BoxFit.cover,
+                        width: 130,
+                        height: 190,
                       ),
-                      image: NetworkImage(
-                        movie.fullPosterImge,
-                      ),
-                      fit: BoxFit.cover,
-                      width: 130,
-                      height: 190,
                     ),
                   ),
                 ),

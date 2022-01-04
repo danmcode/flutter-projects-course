@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:peliculas/models/models.dart';
 import 'package:peliculas/widgets/widgets.dart';
@@ -10,7 +8,7 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Movie movie = ModalRoute.of(context)!.settings.arguments as Movie;
-
+    print('deatils screen: ${movie.heroId}');
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -22,10 +20,12 @@ class DetailsScreen extends StatelessWidget {
             delegate: SliverChildListDelegate(
               [
                 _PosterAndTitle(
-                  movie.title,
-                  movie.originalTitle,
-                  movie.voteAverage.toString(),
-                  movie.fullPosterImge,
+                  movieId: movie.id,
+                  title: movie.title,
+                  originalTitle: movie.originalTitle,
+                  voteAvrage: movie.voteAverage.toString(),
+                  posterPath: movie.fullPosterImge,
+                  heroId: movie.heroId!,
                 ),
                 _Overview(movie.overview),
                 _Overview(movie.overview),
@@ -76,17 +76,21 @@ class _CustomAppBar extends StatelessWidget {
 }
 
 class _PosterAndTitle extends StatelessWidget {
+  final int movieId;
   final String title;
   final String originalTitle;
   final String voteAvrage;
   final String posterPath;
+  final String heroId;
 
-  const _PosterAndTitle(
-    this.title,
-    this.originalTitle,
-    this.voteAvrage,
-    this.posterPath,
-  );
+  const _PosterAndTitle({
+    required this.movieId,
+    required this.title,
+    required this.originalTitle,
+    required this.voteAvrage,
+    required this.posterPath,
+    required this.heroId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -97,16 +101,19 @@ class _PosterAndTitle extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: FadeInImage(
-              placeholder: const AssetImage(
-                'assets/no-image.jpg',
+          Hero(
+            tag: heroId,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: FadeInImage(
+                placeholder: const AssetImage(
+                  'assets/no-image.jpg',
+                ),
+                image: NetworkImage(posterPath),
+                fit: BoxFit.cover,
+                //width: 130,
+                height: 150,
               ),
-              image: NetworkImage(posterPath),
-              fit: BoxFit.cover,
-              width: 130,
-              height: 150,
             ),
           ),
 

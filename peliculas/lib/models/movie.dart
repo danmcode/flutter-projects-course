@@ -34,6 +34,8 @@ class Movie {
   double voteAverage;
   int voteCount;
 
+  String? heroId;
+
   //Funcion para obtener la url de la imagen completa
   get fullPosterImge => (posterPath != null)
       ? 'https://image.tmdb.org/t/p/w500$posterPath'

@@ -19,7 +19,7 @@ class SearchResponse {
       SearchResponse.fromMap(json.decode(str));
 
   factory SearchResponse.fromMap(Map<String, dynamic> json) => SearchResponse(
-        page: (json["page"] == null) ? json["page"] : 1,
+        page: (json["page"] == null) ? 1 : json["page"],
         results: List<Movie>.from(json["results"].map((x) => Movie.fromMap(x))),
         totalPages: json["total_pages"],
         totalResults: json["total_results"],

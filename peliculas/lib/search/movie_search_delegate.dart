@@ -44,7 +44,7 @@ class MovieSearchDelegate extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     if (query.isEmpty) {
-      _emptyContainer();
+      return _emptyContainer();
     }
 
     final moviesProvider = Provider.of<MoviesProvider>(context);
@@ -70,21 +70,30 @@ class MovieSearchDelegate extends SearchDelegate {
 class _MovieItem extends StatelessWidget {
   final Movie movie;
   const _MovieItem({
-    Key? key,
     required this.movie,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
+    String heroId = 'search-${movie.id}-${movie.title}-${movie.originalTitle}';
+    movie.heroId = heroId;
     return ListTile(
-      leading: FadeInImage(
-        placeholder: const AssetImage(
-          'assets/no-image.jpg',
+      leading: Hero(
+        tag: heroId,
+        child: FadeInImage(
+          placeholder: const AssetImage(
+            'assets/no-image.jpg',
+          ),
+          image: NetworkImage(movie.fullPosterImge),
+          fit: BoxFit.contain,
+          width: 60,
         ),
-        image: NetworkImage(movie.fullPosterImge),
-        fit: BoxFit.contain,
-        width: 50,
       ),
+      title: Text(movie.title),
+      subtitle: Text(movie.originalTitle),
+      onTap: () {
+        Navigator.pushNamed(context, 'details', arguments: movie);
+      },
     );
   }
 }
