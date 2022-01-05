@@ -1,3 +1,4 @@
+import 'package:disenos/src/screens/screens.dart';
 import 'package:disenos/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -33,6 +34,8 @@ class _HomeBody extends StatelessWidget {
         children: const [
           //Titulos
           PageTitle(),
+          //Card Body
+          CardTable(),
         ],
       ),
     );
