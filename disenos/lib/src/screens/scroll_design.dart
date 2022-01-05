@@ -21,8 +21,8 @@ class ScrollScreen extends StatelessWidget {
         child: PageView(
           physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.vertical,
-          children: [
-            const Page1(),
+          children: const [
+            Page1(),
             Page2(),
           ],
         ),
@@ -111,6 +111,8 @@ class _BackgroundImage extends StatelessWidget {
 }
 
 class Page2 extends StatelessWidget {
+  const Page2({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
