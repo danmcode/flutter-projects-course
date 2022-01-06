@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
           _HomeBody(),
         ],
       ),
-      bottomNavigationBar: CustomNavigationBar(),
+      bottomNavigationBar: const CustomNavigationBar(),
     );
   }
 }
@@ -33,6 +33,9 @@ class _HomeBody extends StatelessWidget {
         children: const [
           //Titulos
           PageTitle(),
+
+          //Card Table
+          CardTable(),
         ],
       ),
     );
