@@ -34,7 +34,7 @@ class _HomeBody extends StatelessWidget {
           //Titulos
           PageTitle(),
 
-          //Card Table
+          //Card Body
           CardTable(),
         ],
       ),
