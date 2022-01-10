@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qr_reader/src/models/models.dart';
+import 'package:qr_reader/src/providers/db_provider.dart';
 import 'package:qr_reader/src/providers/ui_provider.dart';
 import 'package:qr_reader/src/widgets/widgets.dart';
 
@@ -35,6 +37,14 @@ class _HomePageBody extends StatelessWidget {
     //Obtener el selected menu opt con el provider
     final uiProvider = Provider.of<UiProvider>(context);
     int currentIndex = uiProvider.selectedMenuOpt;
+
+    //TODO: Temporal leer la base de datos
+    final tempScan = ScanModel(valor: "www.google.com");
+    //Crear nuevo registro
+    // DBProvider.db.newScan(tempScan);
+
+    //Obtener los registros
+    // DBProvider.db.getScanById(5).then((value) => print(value!.valor));
 
     switch (currentIndex) {
       case 0:
