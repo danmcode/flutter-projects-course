@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_reader/src/providers/providers.dart';
+import 'package:qr_reader/utils/utils.dart';
 
 class ScanTiles extends StatelessWidget {
   final String tipo;
@@ -45,7 +46,7 @@ class ScanTiles extends StatelessWidget {
           subtitle: Text(scans[i].id.toString()),
           trailing: Icon(Icons.keyboard_arrow_right,
               color: Theme.of(context).primaryColor),
-          onTap: () => print('Abrir algo'),
+          onTap: () => launchURL(context, scans[i]),
         ),
       ),
     );
