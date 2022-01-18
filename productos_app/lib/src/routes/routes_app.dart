@@ -5,5 +5,6 @@ class RoutesApp {
   static Map<String, Widget Function(BuildContext)> routesApp = {
     'home': (_) => const HomeScreen(),
     'login': (_) => const LoginScreen(),
+    'product': (_) => const ProductScreen(),
   };
 }

@@ -17,6 +17,18 @@ class ProductCard extends StatelessWidget {
           children: const [
             _BackgroundImage(),
             _ProductDetails(),
+            Positioned(
+              child: _PriceTag(),
+              top: 0,
+              right: 0,
+            ),
+
+            //TODO: Mostrar de manera condicional
+            Positioned(
+              child: _ProductAvailable(),
+              top: 0,
+              left: 0,
+            ),
           ],
         ),
       ),
@@ -36,6 +48,76 @@ class ProductCard extends StatelessWidget {
       );
 }
 
+class _ProductAvailable extends StatelessWidget {
+  const _ProductAvailable({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 100,
+      height: 70,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(25),
+          bottomRight: Radius.circular(25),
+        ),
+        color: Colors.yellow[800],
+      ),
+      child: const FittedBox(
+        fit: BoxFit.contain,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Text(
+            'No disponible',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _PriceTag extends StatelessWidget {
+  const _PriceTag({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      height: 70,
+      width: 100,
+      decoration: _priceTagDecoration(),
+      child: const FittedBox(
+        fit: BoxFit.contain,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Text(
+            '\$100.99',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  BoxDecoration _priceTagDecoration() => const BoxDecoration(
+      color: Colors.indigo,
+      borderRadius: BorderRadius.only(
+        topRight: Radius.circular(25),
+        bottomLeft: Radius.circular(25),
+      ));
+}
+
 class _ProductDetails extends StatelessWidget {
   const _ProductDetails({
     Key? key,
@@ -43,12 +125,51 @@ class _ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 70,
-      color: Colors.red,
+    return Padding(
+      padding: const EdgeInsets.only(right: 50),
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 10,
+        ),
+        width: double.infinity,
+        height: 70,
+        decoration: _bottonBoxDecoration(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Text(
+              'Disco Duro G',
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            Text(
+              'Id del disco duro',
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.white,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            )
+          ],
+        ),
+      ),
     );
   }
+
+  BoxDecoration _bottonBoxDecoration() => const BoxDecoration(
+        color: Colors.indigo,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(25),
+          topRight: Radius.circular(25),
+        ),
+      );
 }
 
 class _BackgroundImage extends StatelessWidget {
