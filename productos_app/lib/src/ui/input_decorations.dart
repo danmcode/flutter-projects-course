@@ -6,6 +6,7 @@ class InputDecorations {
     required String labelText,
     IconData? prefixIcon,
   }) {
+    print(prefixIcon);
     return InputDecoration(
       enabledBorder: const UnderlineInputBorder(
         borderSide: BorderSide(
@@ -23,10 +24,12 @@ class InputDecorations {
       labelStyle: const TextStyle(
         color: Colors.grey,
       ),
-      prefixIcon: Icon(
-        prefixIcon,
-        color: Colors.deepPurple,
-      ),
+      prefixIcon: prefixIcon != null
+          ? Icon(
+              prefixIcon,
+              color: Colors.deepPurple,
+            )
+          : null,
     );
   }
 }
