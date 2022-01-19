@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:productos_app/src/providers/product_form_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'package:productos_app/src/services/services.dart';
@@ -12,6 +13,24 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final productService = Provider.of<ProductsService>(context);
 
+    return ChangeNotifierProvider<ProductFormProvider>(
+      create: (_) => ProductFormProvider(productService.selectedProduct),
+      child: _ProductScreenBody(productService: productService),
+    );
+    //return _ProductScreenBody(productService: productService);
+  }
+}
+
+class _ProductScreenBody extends StatelessWidget {
+  const _ProductScreenBody({
+    Key? key,
+    required this.productService,
+  }) : super(key: key);
+
+  final ProductsService productService;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -69,6 +88,9 @@ class _ProductForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productFormProvider = Provider.of<ProductFormProvider>(context);
+    final product = productFormProvider.product;
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 10,
@@ -82,6 +104,7 @@ class _ProductForm extends StatelessWidget {
             child: Column(
               children: [
                 TextFormField(
+                  initialValue: product.name,
                   decoration: InputDecorations.authInputDecorations(
                     hintText: 'Nombre del producto',
                     labelText: 'Nombre: ',
@@ -90,6 +113,7 @@ class _ProductForm extends StatelessWidget {
                 const SizedBox(height: 30),
                 TextFormField(
                   keyboardType: TextInputType.number,
+                  initialValue: '\$${product.price}',
                   decoration: InputDecorations.authInputDecorations(
                     hintText: '\$19.00',
                     labelText: 'Precio: ',
@@ -99,7 +123,7 @@ class _ProductForm extends StatelessWidget {
                 SwitchListTile.adaptive(
                   title: const Text('Disponible: '),
                   activeColor: Colors.indigo,
-                  value: true,
+                  value: product.available,
                   onChanged: (value) {},
                 ),
               ],
