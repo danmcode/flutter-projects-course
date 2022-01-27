@@ -13,6 +13,7 @@ class AppState extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ProductsService()),
+        ChangeNotifierProvider(create: (_) => AuthServices()),
       ],
       child: const MyApp(),
     );
@@ -26,8 +27,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      scaffoldMessengerKey: NotificationsService.messengerKey,
       title: 'Material App',
-      initialRoute: 'home',
+      initialRoute: 'checking',
       routes: RoutesApp.routesApp,
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: Colors.grey[300],

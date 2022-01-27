@@ -1,9 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:productos_app/src/models/models.dart';
 import 'package:productos_app/src/screens/loading_screen.dart';
 import 'package:provider/provider.dart';
 
-import 'package:productos_app/src/services/products_service.dart';
 import 'package:productos_app/src/services/services.dart';
 import 'package:productos_app/src/widgets/widgets.dart';
 
@@ -19,10 +20,19 @@ class HomeScreen extends StatelessWidget {
     }
 
     List<Products> products = productsService.products;
-
+    final authServices = Provider.of<AuthServices>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Productos'),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              await authServices.logout();
+              Navigator.pushReplacementNamed(context, 'login');
+            },
+            icon: const Icon(Icons.login_outlined),
+          )
+        ],
       ),
       body: ListView.builder(
         itemCount: products.length,

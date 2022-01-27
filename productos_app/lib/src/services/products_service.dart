@@ -2,13 +2,18 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:productos_app/src/models/models.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 import 'package:http/http.dart' as http;
+
+import 'package:productos_app/src/models/models.dart';
 
 class ProductsService extends ChangeNotifier {
   final String _baseUrl = 'flutter-demo-8637f-default-rtdb.firebaseio.com';
   final List<Products> products = [];
   late Products selectedProduct;
+
+  final storage = const FlutterSecureStorage();
 
   File? newPictureFile;
 
@@ -23,7 +28,9 @@ class ProductsService extends ChangeNotifier {
     isloading = true;
     notifyListeners();
 
-    final url = Uri.https(_baseUrl, 'products.json');
+    final url = Uri.https(_baseUrl, 'products.json', {
+      'auth': await storage.read(key: 'idToken') ?? '',
+    });
     final response = await http.get(url);
 
     final Map<String, dynamic> productsMap = json.decode(response.body);
@@ -56,7 +63,9 @@ class ProductsService extends ChangeNotifier {
   }
 
   Future<String> updateProduct(Products product) async {
-    final url = Uri.https(_baseUrl, 'products/${product.id}.json');
+    final url = Uri.https(_baseUrl, 'products/${product.id}.json', {
+      'auth': await storage.read(key: 'idToken') ?? '',
+    });
     final response = await http.put(url, body: product.toJson());
     final decodeData = response.body;
 
@@ -82,7 +91,9 @@ class ProductsService extends ChangeNotifier {
   }
 
   Future<String> createProduct(Products product) async {
-    final url = Uri.https(_baseUrl, 'products.json');
+    final url = Uri.https(_baseUrl, 'products.json', {
+      'auth': await storage.read(key: 'idToken') ?? '',
+    });
     final response = await http.post(url, body: product.toJson());
     final decodeData = json.decode(response.body);
 
@@ -102,6 +113,8 @@ class ProductsService extends ChangeNotifier {
   }
 
   Future<String?> uploadImage() async {
+    if (newPictureFile == null) return null;
+
     isSaving = true;
     notifyListeners();
 
