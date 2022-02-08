@@ -135,7 +135,6 @@ class _LoginForm extends StatelessWidget {
                     final authServive =
                         Provider.of<AuthServices>(context, listen: false);
 
-                    //TODO: Validar si el registro es correcto
                     final String? errorMessage = await authServive.login(
                         loginForm.email, loginForm.password);
 
