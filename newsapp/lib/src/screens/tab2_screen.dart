@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:newsapp/src/models/models.dart';
 import 'package:newsapp/src/services/news_service.dart';
@@ -40,7 +38,7 @@ class _CategoryList extends StatelessWidget {
 
     return SizedBox(
       width: double.infinity,
-      height: 100,
+      height: 110,
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
@@ -48,7 +46,7 @@ class _CategoryList extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           String cName = categoriesList.categories[index].name;
           return Container(
-            width: 105,
+            width: 110,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
